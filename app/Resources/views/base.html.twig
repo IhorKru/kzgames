@@ -50,16 +50,16 @@
                 <a href="{{ path('index') }}" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
-                <a href="#about" onclick = $("#menu-close").click(); >About</a>
+                <a href="{{ path('index') }}#about" onclick = $("#menu-close").click(); >About</a>
             </li>
             <li>
-                <a href="#services" onclick = $("#menu-close").click(); >Services</a>
+                <a href="{{ path('index') }}#services" onclick = $("#menu-close").click(); >Services</a>
             </li>
             <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >Why Us</a>
+                <a href="{{ path('index') }}#portfolio" onclick = $("#menu-close").click(); >Why Us</a>
             </li>
             <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
+                <a href="{{ path('index') }}#contact" onclick = $("#menu-close").click(); >Contact</a>
             </li>
             <li>
                 <a href="{{ path('terms') }}" onclick = $("#menu-close").click(); >Terms & Conditions</a>
@@ -67,7 +67,7 @@
 	    <li>
                 <a href="{{ path('privacy') }}" onclick = $("#menu-close").click(); >Privacy Policy</a>
             </li>
-			<li>
+            <li>
                 <a class="unsub-text" href="{{ path('unsubscribe') }}" onclick = $("#menu-close").click(); >Unsubscribe</a>
             </li>
         </ul>
@@ -96,8 +96,7 @@
                     </h4>
                     <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@jobbery.com">support@jobbery.com</a>
                         </li>
                     </ul>
                 </div>
