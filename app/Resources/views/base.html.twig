@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>{% block title %}Jobbery | Reshaping Jobsearch{% endblock %}</title>
+    
+    <!-- Favicon -->
+	
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
+    {% block stylesheets %}
+        <!-- Custom CSS -->
+        <link href="{{ asset('css/stylish-portfolio.css')}}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    {% endblock %}
+    
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    
+    <!-- Custom Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation items-->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="{{ path('index') }}"  onclick = $("#menu-close").click(); >Jobbery</a>
+            </li>
+            <li>
+                <a href="{{ path('index') }}" onclick = $("#menu-close").click(); >Home</a>
+            </li>
+            <li>
+                <a href="#about" onclick = $("#menu-close").click(); >About</a>
+            </li>
+            <li>
+                <a href="#services" onclick = $("#menu-close").click(); >Services</a>
+            </li>
+            <li>
+                <a href="#portfolio" onclick = $("#menu-close").click(); >Why Us</a>
+            </li>
+            <li>
+                <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
+            </li>
+            <li>
+                <a href="{{ path('terms') }}" onclick = $("#menu-close").click(); >Terms & Conditions</a>
+            </li>
+	    <li>
+                <a href="{{ path('privacy') }}" onclick = $("#menu-close").click(); >Privacy Policy</a>
+            </li>
+			<li>
+                <a class="unsub-text" href="{{ path('unsubscribe') }}" onclick = $("#menu-close").click(); >Unsubscribe</a>
+            </li>
+        </ul>
+    </nav>
+    
+    
+    <!-- Header ***make header 50% smaller-->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Jobbery - reshaping jobsearch</h1>
+            <h3>We are about to redefine traditional job search</h3>
+            <br>
+            {% block header %}{% endblock %}
+        </div>
+    </header>
+    
+    {% block body %}{% endblock %}
+   
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Jobbery.com</strong>
+                    </h4>
+                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block javascripts %}
+    
+        <!-- jQuery -->
+        <script src="{{asset('js/jquery-1.12.3.min.js')}}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+            <script src="{{ asset('js/old/plugins.js')}}"></script>
+            <script src="{{ asset('js/old/main.js')}}"></script>
+
+        <script>
+        // Closes the sidebar menu
+        $("#menu-close").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+
+        // Opens the sidebar menu
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+        
+        </script>
+        
+    {% endblock %}
+</body>
+
+</html>
+
