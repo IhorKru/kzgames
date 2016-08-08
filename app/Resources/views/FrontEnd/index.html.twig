@@ -44,19 +44,25 @@
             </div>
             <div class="picklist-style">
                 <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                    {{ form_widget(form.agreeterms) }}
-                    <lable> {{ 'I have read and agreed to ' }} <a href="{{ path('terms') }}"> {{ 'Jobbery Terms & Conditions' }} </a> </lable>
-                    {{ form_row(form.agreeterms) }}
+                    {% for field in form.optindetails %}
+                        {{ form_widget(field.agreeterms) }}
+                        <lable> {{ 'I have read and agreed to ' }} <a href="{{ path('terms') }}" target="_blank"> {{ 'Terms & Conditions' }} </a> </lable>
+                        {{ form_row(field.agreeterms) }}
+                    {% endfor %}   
                 </div>
                 <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                    {{ form_widget(form.agreeemails) }}
-                     <lable> {{ 'I want to get emails from Jobbery.com' }} </lable>
-                    {{ form_row(form.agreeemails) }}
+                    {% for field in form.optindetails %}
+                        {{ form_widget(field.agreeemails) }}
+                        <lable> {{ 'I want to get emails from Jobbery.com' }} </lable>
+                        {{ form_row(field.agreeemails) }}
+                    {% endfor %}  
                 </div>
                 <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                    {{ form_widget(form.agreepartners) }}
-                    <lable> {{ 'I want to get mails from Partners of Jobbery.com' }} </lable>
-                    {{ form_row(form.agreepartners) }}
+                     {% for field in form.optindetails %}
+                        {{ form_widget(field.agreepartners) }}
+                        <lable> {{ 'I want to get mails from Partners of Jobbery.com' }} </lable>
+                        {{ form_row(field.agreepartners) }}
+                    {% endfor %}  
                 </div>
             </div>
             <div class="btn btn-dark btn-lg">
