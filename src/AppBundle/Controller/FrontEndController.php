@@ -66,7 +66,7 @@ class FrontEndController extends Controller
                     $newSubscriber ->setGender($gender);
                     $newSubscriber ->setEducationLevelId(-1);
                     $newSubscriber ->setHash($hash);
-                    
+                    $newSubscriber ->setSourceid(1);
                     $newOptInDetails ->setUser($newSubscriber);
                     $newOptInDetails ->setResourceid(1);
                     $newOptInDetails ->setAgreeterms($agreeterms);
