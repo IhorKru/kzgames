@@ -28,9 +28,9 @@ class FrontEndController extends Controller
             $newOptInDetails = new SubscriberOptInDetails();
                 $newSubscriber ->getOptindetails() ->add($newOptInDetails);
                 
-            $form = $this->createForm(SubscriberType::class, $newSubscriber, array(
-                    'action' => $this -> generateUrl('index'),
-                    'method' => 'POST'));
+            $form = $this->createForm(SubscriberType::class, $newSubscriber, [
+                'action' => $this -> generateUrl('index'),
+                'method' => 'POST']);
 
             $form->handleRequest($request);
             
@@ -95,15 +95,15 @@ class FrontEndController extends Controller
                 $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/' . $newSubscriber->getEmailAddress() . '?id=' . urlencode($hash));
                 $message = Swift_Message::newInstance()
                     ->setSubject('Jobbery.com | Complete Registration')
-                    ->setFrom(array('relaxstcom@gmail.com' => 'Jobbery.com Support Team'))
+                    ->setFrom(['relaxstcom@gmail.com' => 'Jobbery.com Support Team'])
                     ->setTo($newSubscriber->getEmailAddress())
                     ->setContentType("text/html")
-                    ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', array(
-                            'url' => $urlButton, 
-                            'name' => $newSubscriber->getFirstname(),
-                            'lastname' => $newSubscriber->getLastname(),
-                            'email' => $newSubscriber->getEmailAddress()
-                        )));
+                    ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', [
+                        'url' => $urlButton, 
+                        'name' => $newSubscriber->getFirstname(),
+                        'lastname' => $newSubscriber->getLastname(),
+                        'email' => $newSubscriber->getEmailAddress()
+                        ]));
 
                 //send email
                 $this->get('mailer')->send($message);
@@ -119,10 +119,10 @@ class FrontEndController extends Controller
          $error =1;
         }
         
-        return $this->render('FrontEnd/index.html.twig', array(
+        return $this->render('FrontEnd/index.html.twig', [
             'form' => $form->createView(),
             'error' => $error
-        ));
+            ]);
     }
     
     /**
@@ -212,10 +212,10 @@ class FrontEndController extends Controller
         $error = 0;
         $unsubscriber = new SubscriberOptOutDetails();
         
-        $form = $this->createForm(SubscriberOptOutType::class, $unsubscriber, array(
+        $form = $this->createForm(SubscriberOptOutType::class, $unsubscriber, [
             'action' => $this->generateUrl('unsubscribe'),
             'method' => 'POST'
-        ));
+            ]);
         
         $form->handleRequest($request);
         
@@ -227,15 +227,15 @@ class FrontEndController extends Controller
                     $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/unsubscribe/' . $subscriber->getEmailAddress() . '?id=' . urlencode($subscriber->getHash()));
                     $message = Swift_Message::newInstance()
                         ->setSubject('Jobbery | We are sorry you are leaving us')
-                        ->setFrom(array('relaxstcom@gmail.com' => 'Jobbery Support Team'))
+                        ->setFrom(['relaxstcom@gmail.com' => 'Jobbery Support Team'])
                         ->setTo($subscriber->getEmailAddress())
                         ->setContentType("text/html")
-                        ->setBody($this->renderView('FrontEnd/emailUnsubscribe.html.twig', array(
+                        ->setBody($this->renderView('FrontEnd/emailUnsubscribe.html.twig', [
                             'url' => $urlButton, 
                             'name' => $subscriber->getFirstname(),
                             'lastname' => $subscriber->getLastname(),
                             'email' => $subscriber->getEmailAddress()
-                        )));
+                            ]));
 
                     $this->get('mailer')->send($message);
                     return $this->redirect($this->generateUrl('sorryunsubscribe'));
@@ -244,10 +244,10 @@ class FrontEndController extends Controller
             }
         }
 
-        return $this->render('FrontEnd/unsubscribe.html.twig', array(
+        return $this->render('FrontEnd/unsubscribe.html.twig', [
             'form' => $form->createView(),
             'error' => $error
-        ));
+            ]);
 
     }    
     
