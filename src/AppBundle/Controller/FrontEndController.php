@@ -95,7 +95,7 @@ class FrontEndController extends Controller
                 $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/' . $newSubscriber->getEmailAddress() . '?id=' . urlencode($hash));
                 $message = Swift_Message::newInstance()
                     ->setSubject('Jobbery.com | Complete Registration')
-                    ->setFrom(['relaxstcom@gmail.com' => 'Jobbery.com Support Team'])
+                    ->setFrom(['support@jobbery.com' => 'Jobbery.com Support Team'])
                     ->setTo($newSubscriber->getEmailAddress())
                     ->setContentType("text/html")
                     ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', [
@@ -227,7 +227,7 @@ class FrontEndController extends Controller
                     $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/unsubscribe/' . $subscriber->getEmailAddress() . '?id=' . urlencode($subscriber->getHash()));
                     $message = Swift_Message::newInstance()
                         ->setSubject('Jobbery | We are sorry you are leaving us')
-                        ->setFrom(['relaxstcom@gmail.com' => 'Jobbery Support Team'])
+                        ->setFrom(['support@jobbery.com' => 'Jobbery Support Team'])
                         ->setTo($subscriber->getEmailAddress())
                         ->setContentType("text/html")
                         ->setBody($this->renderView('FrontEnd/emailUnsubscribe.html.twig', [
@@ -279,7 +279,7 @@ class FrontEndController extends Controller
     }
     
     private function generateEmailUrl($url) {
-        return "http://localhost:8888" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
+        return "http://jobbery.com/" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
     }
       
 }
