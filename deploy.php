@@ -4,20 +4,19 @@
  * Please change the configuration for correct use deploy.
  */
 
-require 'recipe/symfony.php';
+require 'recipe/symfony3.php';
 
 // Set configurations
-set('repository', 'git@github.com:IhorKru/jobbery.com.git');
+set('repository', 'https://github.com/IhorKru/jobbery.com.git');
 set('shared_files', ['app/config/parameters.yml']);
 set('shared_dirs', ['app/logs']);
 set('writable_dirs', ['app/cache', 'app/logs']);
 
 // Configure servers
-server('production', 'jobbery.eu.pn', '21')
-    ->user('2136439')
-    ->password('80506043850Qq!')
-    ->env('deploy_path', '/home/www/jobbery.eu.pn/web')
-    ->stage('production');
+server('production', 'mediaff.com', '22')
+    ->user('mediazmj')
+    ->password('3+f9mJ5#1n0q')
+    ->env('deploy_path', '/home/mediazmj/public_html/insureguidance.com');
 
 /**
  * Restart php-fpm on success deploy.
