@@ -298,7 +298,7 @@ class FrontEndController extends Controller
     }
     
     private function generateEmailUrl($url) {
-        return "http://jobbery.mediaff.com/" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
+        return "http://jobbery.mediaff.com" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
     }
       
 }
