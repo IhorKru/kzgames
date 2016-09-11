@@ -7,7 +7,7 @@ parameters:
     database_password: '3+f9mJ5#1n0q'
     mailer_transport: smtp
     mailer_host: localhost
-    mailer_user: support@finsensitive.com
+    mailer_user: support@jobbery.com
     mailer_password: 80506043850Qq
 #    #PostgreSQL test logins
 #    database_host: 127.0.0.1
