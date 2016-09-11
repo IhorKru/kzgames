@@ -16,6 +16,9 @@ use AppBundle\Entity\SubscriberOptInDetails;
 class SubscriberDetails
 {
     
+    /**
+     *@ORM\OneToMany(targetEntity="SubscriberOptInDetails", mappedBy="user", cascade={"persist"})
+     */
     private $optindetails;
             
     public function __construct()
@@ -26,9 +29,9 @@ class SubscriberDetails
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      */
     private $id;
 
