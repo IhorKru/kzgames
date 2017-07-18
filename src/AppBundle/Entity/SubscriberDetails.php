@@ -35,69 +35,24 @@ class SubscriberDetails
      */
     private $id;
 
-    /**
-     * @var string
-     * @Assert\NotBlank (message="Complete First Name field")
-     * @ORM\Column(name="firstname", type="string", length=100)
-     */
-    private $firstname;
-
-    /**
-     * @var string
-     * @Assert\NotBlank (message="Complete Last Name field")
-     * @ORM\Column(name="lastname", type="string", length=100)
-     */
-    private $lastname;
-
-    /**
-     * @var string
-     * @Assert\NotBlank (message="Complete Email Address field")
-     * @ORM\Column(name="emailaddress", type="string", length=100)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true,
-     *     checkHost = true
-     * )
-     */
-    private $emailaddress;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank (message="Complete Mobile Phone field")
+     * @Assert\NotBlank (message="Введите кореектный номер мобильного")
      * @ORM\Column(name="phone", type="string", length=50)
-     * @Assert\Length(min=5) (message="Phone lenght must be over 5 characters")
+     * @Assert\Length(min=5) (message="Мобильный номер должен состоять из 9 цифр")
      */
     private $phone;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="age", type="smallint")
-     * 
-     */
-    private $age;
-
-    /**
-     * @var int
-     * @Assert\NotBlank (message="Complete Gender field")
-     * @ORM\Column(name="gender", type="smallint")
-     */
-    private $gender;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="educationlevelid", type="smallint")
-     */
-    private $educationlevelid;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="hash", type="string", length=255)
+     * @Assert\NotBlank (message="Введите првельный SMS код")
+     * @ORM\Column(name="phone", type="string", length=50)
+     * @Assert\Length(min=5) (message="SMS код должен состоять из 7 символов")
      */
-    private $hash;
+    private $smscode;
 
     /**
      * @var int
@@ -130,77 +85,6 @@ class SubscriberDetails
         return $this->id;
     }
 
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     *
-     * @return SubscriberDetails
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    /**
-     * Get firstname
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set lastname
-     *
-     * @param string $lastname
-     *
-     * @return SubscriberDetails
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
-     * Get lastname
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set emailaddress
-     *
-     * @param string $emailaddress
-     *
-     * @return SubscriberDetails
-     */
-    public function setEmailaddress($emailaddress)
-    {
-        $this->emailaddress = $emailaddress;
-
-        return $this;
-    }
-
-    /**
-     * Get emailaddress
-     *
-     * @return string
-     */
-    public function getEmailaddress()
-    {
-        return $this->emailaddress;
-    }
 
     /**
      * Set phone
@@ -227,111 +111,29 @@ class SubscriberDetails
     }
 
     /**
-     * Set age
+     * Set smscode
      *
-     * @param integer $age
+     * @param string $smscode
      *
      * @return SubscriberDetails
      */
-    public function setAge($age)
+    public function setSmscode($smscode)
     {
-        $this->age = $age;
+        $this->smscode = $smscode;
 
         return $this;
     }
 
     /**
-     * Get age
-     *
-     * @return integer
-     */
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param integer $gender
-     *
-     * @return SubscriberDetails
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return integer
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set educationlevelid
-     *
-     * @param integer $educationlevelid
-     *
-     * @return SubscriberDetails
-     */
-    public function setEducationlevelid($educationlevelid)
-    {
-        $this->educationlevelid = $educationlevelid;
-
-        return $this;
-    }
-
-    /**
-     * Get educationlevelid
-     *
-     * @return integer
-     */
-    public function getEducationlevelid()
-    {
-        return $this->educationlevelid;
-    }
-
-    /**
-     * Set hash
-     *
-     * @param string $hash
-     *
-     * @return SubscriberDetails
-     */
-    public function setHash($hash)
-    {
-        $this->hash = $hash;
-
-        return $this;
-    }
-
-    /**
-     * Get hash
+     * Get phone
      *
      * @return string
      */
-    public function getHash()
+    public function getSmscode()
     {
-        return $this->hash;
+        return $this->smscode;
     }
-    
-     public function getOptindetails()
-    {
-        return $this->optindetails;
-    }
-    
-    public function setOptindetails(ArrayCollection $optindetails)
-    {
-        $this->optindetails = $optindetails;
-    }
-    
+
     /**
      * Set sourceid
      *
@@ -356,27 +158,4 @@ class SubscriberDetails
         return $this->sourceid;
     }
 
-    /**
-     * Add optindetail
-     *
-     * @param \AppBundle\Entity\SubscriberOptInDetails $optindetail
-     *
-     * @return SubscriberDetails
-     */
-    public function addOptindetail(\AppBundle\Entity\SubscriberOptInDetails $optindetail)
-    {
-        $this->optindetails[] = $optindetail;
-
-        return $this;
-    }
-
-    /**
-     * Remove optindetail
-     *
-     * @param \AppBundle\Entity\SubscriberOptInDetails $optindetail
-     */
-    public function removeOptindetail(\AppBundle\Entity\SubscriberOptInDetails $optindetail)
-    {
-        $this->optindetails->removeElement($optindetail);
-    }
 }

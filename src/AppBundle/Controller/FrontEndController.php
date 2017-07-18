@@ -25,9 +25,6 @@ class FrontEndController extends Controller
         $error = 0;
         try {
             $newSubscriber = new SubscriberDetails();
-            $exsSubscriber = new SubscriberDetails();
-            $newOptInDetails = new SubscriberOptInDetails();
-                $newSubscriber ->getOptindetails() ->add($newOptInDetails);
                 
             $form = $this->createForm(SubscriberType::class, $newSubscriber, [
                 'action' => $this -> generateUrl('index'),
@@ -36,23 +33,12 @@ class FrontEndController extends Controller
             $form->handleRequest($request);
             
             //validating data in the form and sending email
-            if($form->isValid() && $form->isSubmitted())
+            if($form->isSubmitted() && $form->isValid())
             {
                 //getting data from the form
-                $firstname = $form['firstname']->getData();
-                $lastname = $form['lastname']->getData();
-                $emailaddress = $form['emailaddress']->getData();
+
                 $phone = $form['phone']->getData();
-                $gender = $form['gender']->getData();
-                foreach ($form->get('optindetails') as $subForm) {
-                    $agreeterms = $subForm['agreeterms']->getData();
-                }
-                foreach ($form->get('optindetails') as $subForm) {
-                    $agreeemails = $subForm['agreeemails']->getData();
-                }
-                foreach ($form->get('optindetails') as $subForm) {
-                    $agreepartners = $subForm['agreepartners']->getData();
-                }
+
                 $hash = $this->mc_encrypt($newSubscriber->getEmailAddress(), $this->generateKey(16));
                 $em = $this->getDoctrine()->getManager();
                 $exsSubscriber = $em->getRepository('AppBundle:SubscriberDetails') ->findOneBy(['emailaddress' => $emailaddress]);
@@ -60,26 +46,11 @@ class FrontEndController extends Controller
                     //if user does not exist -> collect user details
                     $query = $em ->createQuery('SELECT MAX(s.id) FROM AppBundle:SubscriberDetails s');
                     $newSubscriber ->setId($query->getSingleScalarResult() + 1);
-                    $newSubscriber ->setFirstname($firstname);
-                    $newSubscriber ->setLastname($lastname);
-                    $newSubscriber ->setEmailaddress($emailaddress);
                     $newSubscriber ->setPhone($phone);
-                    $newSubscriber ->setAge(-1);
-                    $newSubscriber ->setGender($gender);
-                    $newSubscriber ->setEducationLevelId(-1);
-                    $newSubscriber ->setHash($hash);
                     $newSubscriber ->setSourceid(1);
-                    //if user does not exist -> collect user optin details
-                    $query1 = $em ->createQuery('SELECT MAX(t.id) FROM AppBundle:SubscriberOptIndetails t');
-                    $newOptInDetails ->setId($query1->getSingleScalarResult() + 1);
-                    $newOptInDetails ->setUser($newSubscriber);
-                    $newOptInDetails ->setResourceid(1);
-                    $newOptInDetails ->setAgreeterms($agreeterms);
-                    $newOptInDetails ->setAgreeemails($agreeemails);
-                    $newOptInDetails ->setAgreepartners($agreepartners);
+
                     //pusshing data through to the database
                     $em->persist($newSubscriber);
-                    $em->persist($newOptInDetails);
                     $em->flush();
                 } else {
                     //if user does not exist for this resource
@@ -88,15 +59,7 @@ class FrontEndController extends Controller
                     if(!$isopted) {
                         //if user does not exist under other resources as well -> collect optin details
                         $query2 = $em ->createQuery('SELECT MAX(t.id) FROM AppBundle:SubscriberOptInDetails t');
-                        $newOptInDetails ->setId($query2->getSingleScalarResult() + 1);
-                        $newOptInDetails ->setUser($exsSubscriber);
-                        $newOptInDetails ->setResourceid(1);
-                        $newOptInDetails ->setAgreeterms($agreeterms);
-                        $newOptInDetails ->setAgreeemails($agreeemails);
-                        $newOptInDetails ->setAgreepartners($agreepartners);
                         //pushing optin details to db
-                        $em->persist($newOptInDetails);
-                        $em->flush($newOptInDetails);
                     } else {
                         //if user already exists under this resource
                         $newContact = new Contact();
@@ -112,23 +75,7 @@ class FrontEndController extends Controller
                         ]);
                     }
                 }
-                    
-                //create email
-                $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/' . $newSubscriber->getEmailAddress() . '?id=' . urlencode($hash));
-                $message = Swift_Message::newInstance()
-                    ->setSubject('Jobbery.com | Complete Registration')
-                    ->setFrom(['support@jobbery.com' => 'Jobbery.com Support Team'])
-                    ->setTo($newSubscriber->getEmailAddress())
-                    ->setContentType("text/html")
-                    ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', [
-                        'url' => $urlButton, 
-                        'name' => $newSubscriber->getFirstname(),
-                        'lastname' => $newSubscriber->getLastname(),
-                        'email' => $newSubscriber->getEmailAddress()
-                        ]));
-
-                //send email
-                $this->get('mailer')->send($message);
+                //verify code
 
                 //generating successfull responce page
                 return $this->redirect($this->generateUrl('thankureg'));

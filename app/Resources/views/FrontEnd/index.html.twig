@@ -1,78 +1,37 @@
 {% extends 'base.html.twig' %}
 
+{% block javascript %}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bfh/js/bootstrap-formhelpers-phone.js') }}"></script>
+{% endblock %}
+
 {% block header %}
-    <div class="subscribe-form" >
-        <div class= "row">
-            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-
-            <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
-                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <span class="form-control form-padding-set"> 
-                    {{ form_label(form.firstname) }}
-                    {{ form_widget(form.firstname) }}
-                </span>
-            </div>
-
-            <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
-                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <span class="form-control form-padding-set">
-                    {{ form_label(form.lastname) }}
-                    {{ form_widget(form.lastname) }}
-                </span>    
-            </div>
-
-            <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
-                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                <span class="form-control form-padding-set">
-                    {{ form_label(form.emailaddress) }}
-                    {{ form_widget(form.emailaddress) }}
-                </span>
-            </div>
-            <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
-                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                 <span class="form-control form-padding-set">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form id="msform">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="active">Номер мобильного</li>
+                    <li>Проверочный код</li>
+                    <li>Наслождайтесь</li>
+                </ul>
+                <!-- fieldsets -->
+                <fieldset>
+                    <h3 class="fs-subtitle">Введите норме мобильного</h3>
                     {{ form_label(form.phone) }}
                     {{ form_widget(form.phone) }}
-                 </span>
-            </div>
-            <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
-                <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                <span class="form-control form-padding-set" style="border-radius: 5px">
-                {{ form_label(form.gender) }}
-                {{ form_widget(form.gender) }}
-                </span>
-            </div>
-            <div class="picklist-style">
-                <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                    {% for field in form.optindetails %}
-                        {{ form_widget(field.agreeterms) }}
-                        <lable> {{ 'I have read and agreed to ' }} <a href="{{ path('terms') }}" target="_blank"> {{ 'Terms & Conditions' }} </a> </lable>
-                        {{ form_row(field.agreeterms) }}
-                    {% endfor %}   
-                </div>
-                <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                    {% for field in form.optindetails %}
-                        {{ form_widget(field.agreeemails) }}
-                        <lable> {{ 'I want to get emails from Jobbery.com' }} </lable>
-                        {{ form_row(field.agreeemails) }}
-                    {% endfor %}  
-                </div>
-                <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                     {% for field in form.optindetails %}
-                        {{ form_widget(field.agreepartners) }}
-                        <lable> {{ 'I want to get mails from Partners of Jobbery.com' }} </lable>
-                        {{ form_row(field.agreepartners) }}
-                    {% endfor %}  
-                </div>
-            </div>
-            <div class="btn btn-dark btn-lg">
-                {{ form_row(form.submit, { 'label': 'Subscribe to join' }) }}
-            </div>    
-                
-            {{ form_end(form) }}    
-        </div>    
+                    <input type="button" name="next" class="next action-button" value="Продолжить"/>
+                </fieldset>
+                <fieldset>
+                    <h3 class="fs-subtitle">Введите смс код</h3>
+                    {{ form_label(form.smscode) }}
+                    {{ form_widget(form.smscode) }}
+                    <input type="button" name="next" class="next action-button" value="Начать играть"/>
+                </fieldset>
+            </form>
+
+        </div>
     </div>
-    
     <div class="window-BG" id="alert">
         <div class="window">
             <div id="alert-title" class="win-img-text">{{ 'Please solve below errors'|trans }}:</div>
@@ -86,205 +45,65 @@
     </div>
 {% endblock %}
 {% block body %}
-    <!-- About -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Jobbery is meant to redefine the way you are getting connected with job opportunities.</h2>
-                    <p class="lead"> We are adding final features to our revolutionary job engine and prospective users are welcome to subscribe to our newsletters to always be in touch </a>.</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
+    <section>
+        <div class="trend-w3layouts">
+            <div class="container">
+                <h2>Лучшие игры в твоем мобильном</h2>
+                <ul id="flexiselDemo1">
+                    <li>
+                        <div class="trend-grid">
+                            <h4>Racing Games</h4>
+                            <img src="{{ asset('img/tg1.jpg') }}" alt=" " class="img-responsive" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="trend-grid">
+                            <h4>3D Games</h4>
+                            <img src="{{ asset('img/tg2.jpg') }}" alt=" " class="img-responsive" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="trend-grid">
+                            <h4>Action Games</h4>
+                            <img src="{{ asset('img/tg3.jpg') }}" alt=" " class="img-responsive" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="trend-grid">
+                            <h4>Toy Games</h4>
+                            <img src="{{ asset('img/tg4.jpg') }}" alt=" " class="img-responsive" />
+                        </div>
+                    </li>
+                </ul>
+                <script type="text/javascript" src="{{ asset('js/jquery.flexisel.js') }}"></script>
+                <script type="text/javascript">
+                    $(window).load(function() {
+                        $("#flexiselDemo1").flexisel({
+                            visibleItems: 4,
+                            animationSpeed: 1000,
+                            autoPlay: true,
+                            autoPlaySpeed: 3000,
+                            pauseOnHover: true,
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint:480,
+                                    visibleItems: 2
+                                },
+                                landscape: {
+                                    changePoint:640,
+                                    visibleItems:3
+                                },
+                                tablet: {
+                                    changePoint:768,
+                                    visibleItems: 4
+                                }
+                            }
+                        });
 
-    <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Our Services</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Resume Storage</strong>
-                                </h4>
-                                <p>Store your resumes at one place and you'll never have to search for them</p>
-                                <!--<a href="#" class="btn btn-light">Learn More</a>-->
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Geo Targeted Job Search</strong>
-                                </h4>
-								
-                                <p>Get the job you deserve where you want it and when you need it</p>
-                                <!--<a href="#" class="btn btn-light">Learn More</a> -->
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Advanced technology</strong>
-                                </h4>
-                                <p>We use high-end matching tools to deliver only relevant content</p>
-                                <!--<a href="#" class="btn btn-light">Learn More</a> -->
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Safty & Security</strong>
-                                </h4>
-                                <p>Full control over data available to recruiters & potential employers</p>
-                                <!--<a href="#" class="btn btn-light">Learn More</a> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-
-    <!-- Callout -->
-    <aside class="callout">
-        <div class="text-vertical-center textc">
-            <h1>High End technology working for you</h1>
-        </div>
-    </aside>
-
-    <!-- Portfolio -->
-	<!-- When scrolling over on one of portfolio images, text with detailed description need to pop-up-->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Why us?</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="{{ asset('img/portfolio-1.jpg')}}">
-                                    <div class="portfolio-overlay">
-                                        <h3>Wide Industrial Coverage</h3>
-                                        <p class="small-body">Here in Jobbery we know how hard can it be to find a matching career opportunity for niche professionals. On the other hand getting a right man for a very specific job might be as challanging.
-                                           With this in mind, Jobbery will aim to provide industry's widest coverage to make sure <span> <b> Everyone can find a matching job </b> </span> </p>
-                                        <div class="btn btn-info">
-                                            <a href="#" style="color:white"> Subscribe to Join </a>
-                                        </div>
-                                        <!--<a href="{{ asset('img/portfolio-1.jpg')}}" data-rel="lighbox" class="expand"> </a>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                               <div class="portfolio-thumb">
-                                    <img src="{{ asset('img/portfolio-2.jpg')}}">
-                                    <div class="portfolio-overlay">
-                                            <h3>High accuracy matching tools</h3>
-                                            <p class="small-body">Getting the right match of candidate to potential career opportunity can be a tricky task. To do it right, Jobbery is commited to using industry's leading technology to make sure both candidates and employers get the highest 
-                                                possible added value. Stay tunned for more details, lunch date and watch us <b> redefine the way people are looking for jobs </b></p>
-                                            <div class="btn btn-info">
-                                                <a href="#" style="color:white"> Subscribe to Join </a>
-                                            </div>
-                                            <!--<a href="{{ asset('img/portfolio-2.jpg')}}" data-rel="lighbox" class="expand"> </a>-->
-                                    </div>
-                                </div>	
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                               <div class="portfolio-thumb">
-                                    <img src="{{ asset('img/portfolio-3.jpg')}}">
-                                    <div class="portfolio-overlay">
-                                            <h3>Top employers & Recruiters</h3>
-                                            <p class="small-body">Aiming to become a leading player in connecting potential candidates with job opportunities, Jobbery constantly working on increasing list of our partners. From world's lagest companies and recruitment businesses 
-                                            to small and medium start-ups - Jobbery is doing it's best to provide it's users with widest choice of carrer opportunities out there.</p>
-                                            <div class="btn btn-info">
-                                                <a href="#" style="color:white"> Subscribe to Join </a>
-                                            </div>
-                                            <!--<a href="{{asset('img/portfolio-3.jpg')}}" data-rel="lighbox" class="expand"> </a>-->
-                                    </div>
-                                </div>	
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                    <img src="{{asset('img/portfolio-4.jpg')}}">
-                                    <div class="portfolio-overlay">
-                                        <h3>All devices everywhere</h3>
-                                        <p class="small-body">We makeing sure you next perfect job opportunity will reach you anywhere you are. Whether it is on your mobil, tablet or desctop - here in Jobbery we want to make sure you will never miss an opportunity again. 
-                                            Too busy applying now - save it down and get to it when you feel like it</p>
-                                            <div class="btn btn-info">
-                                                <a href="#" style="color:white"> Subscribe to Join </a>
-                                            </div>
-                                        <!--<a href="{{asset('img/portfolio-4.jpg')}}" data-rel="lighbox" class="expand"> </a>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row (nested) -->
-                    <!--<a href="#" class="btn btn-dark">Subscribe for more</a> -->
-                </div>
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-
-    <!-- Call to Action -->
-    <aside class="call-to-action bg-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Get started with Jobbery.com by subscribing to our email campaigns and get free access to full services once they become available.</h3>
-                    <a href="#" class="btn btn-lg btn-light">Suscribe for more</a>
-                    <!--<a href="#" class="btn btn-lg btn-dark">Look at Me!</a> -->
-                </div>
+                    });
+                </script>
             </div>
         </div>
-    </aside>
-
-    <!-- Map -->
-    <section id="contact" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?q=KEMP+HOUSE,+160+City+Road,+London+EC1V+2NX,+United+Kingdom&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
-        <br />
-        <small>
-            <a href="https://www.google.com/maps/embed/v1/place?q=KEMP+HOUSE,+160+City+Road,+London+EC1V+2NX,+United+Kingdom&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></a>
-        </small>
-        </iframe>
     </section>
-    <script>
-    </script>    
 {% endblock %}    

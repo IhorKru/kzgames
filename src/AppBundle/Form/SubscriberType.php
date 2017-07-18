@@ -19,13 +19,9 @@ class SubscriberType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
-            ->add('firstname', TextType::class, ['label' => false, 'required' => true, 'attr' => ['placeholder' => 'First Name', 'class' => 'form-field-set']])
-            ->add('lastname', TextType::class, ['label' => false, 'required' => true, 'attr' => ['placeholder' => 'Last Name', 'class' => 'form-field-set']])
-            ->add('emailaddress', EmailType::class, ['label' => false, 'required' => true, 'attr' => ['placeholder' => 'Email Address', 'pattern' => '.{2,}', 'class' => 'form-field-set']])  
-            ->add('phone', TextType::class, ['label' => false, 'required' => true, 'error_bubbling' => true, 'attr' => ['placeholder' => 'Mobile Phone', 'pattern' => '.{2,}', 'class' => 'form-field-set']])
-            ->add('gender', ChoiceType::class, ['choices' => array('Male' => 1, 'Female' => 2, 'Refuce to answer' => 0), 'label' => false, 'required' => true, 'error_bubbling' => true, 'placeholder' => 'Gender', 'attr' => ['class' => 'form-field-set']])
-            ->add('optindetails', CollectionType::class, ['entry_type' => SubscriberOptInType::class])
-            ->add('submit', SubmitType::class, ['label' => 'Sign Up', 'attr' => ['class' => 'sub-btn' ]]);
+            ->add('phone', TextType::class, ['label' => false, 'required' => true, 'error_bubbling' => true, 'attr' => ['class' => 'input-medium bfh-phone', 'data-format' => '+7 (ddd) ddd-dddd' , 'style' => 'text-align:center']])
+            ->add('smscode', TextType::class, ['label' => false, 'required' => true, 'error_bubbling' => true, 'attr' => ['placeholder' => 'SMS Код', 'pattern' => '.{6,}', 'style' => 'text-align:center']])
+            ->add('submit', SubmitType::class, ['label' => 'Получить код', 'attr' => ['class' => 'sub-btn' ]]);
     }
     
     /**
